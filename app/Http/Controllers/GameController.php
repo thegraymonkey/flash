@@ -47,11 +47,8 @@ class GameController extends Controller {
 		{
 			
 			$image = Request::file('photo');
-			
-			if($image)
-			{
-				return $this->saveWithImage($image);
-			}
+
+
 			$game = new Game;
 			
 			$game->title = $input['title'];
@@ -63,8 +60,13 @@ class GameController extends Controller {
 			$game->instructions = $input['instructions'];
 
 			$game->thumbnail = $input['thumbnail'];
-
+			
 			$game->user_id = Auth::user()->id;
+			
+			if ($image)
+			{
+				$game = $this->withImage($game, $image);
+			}
 
 			$game->save();
 
@@ -183,7 +185,7 @@ class GameController extends Controller {
 		return redirect('home')->withErrors($validation);
 	}
 
-	protected function saveWithImage($image){
+	protected function withImage(Game $game, $image){
 
 			// file name factory
 		$fileName = time() . md5($image->getClientOriginalName());
@@ -199,28 +201,11 @@ class GameController extends Controller {
 		->widen(400)
 		->save($originalImagePath);
 
-		$game = new Game;
-		
-		$game->title = $input['title'];
-
-		$game->description = $input['description'];
-
-		$game->code = $input['code'];
-
-		$game->instructions = $input['instructions'];
-
-		$game->thumbnail = $input['thumbnail'];
-
 		$game->file_name = $fileName;
 
 		$game->file_ext = $fileExt;
 
-		$game->user_id = Auth::user()->id;
-
-		$game->save();
-
-		return redirect('home')->with('message', 'Game Published!');
-
+		return $game;
 	}
 
 }
