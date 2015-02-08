@@ -46,11 +46,8 @@ class GameController extends Controller {
 		if ($validation->passes())
 		{
 			
-			$image = Request::file('photo');
-
-
 			$game = new Game;
-			
+
 			$game->title = $input['title'];
 
 			$game->description = $input['description'];
@@ -65,7 +62,7 @@ class GameController extends Controller {
 			
 			if ($image)
 			{
-				$game = $this->withImage($game, $image);
+				$game = $this->withImage($game, Request::file('photo'));
 			}
 
 			$game->save();
@@ -185,25 +182,27 @@ class GameController extends Controller {
 		return redirect('home')->withErrors($validation);
 	}
 
-	protected function withImage(Game $game, $image){
-
+	protected function withImage(Game $game, $image)
+	{
+		if ($image)
+		{
 			// file name factory
-		$fileName = time() . md5($image->getClientOriginalName());
-		$fileExt = $image->getClientOriginalExtension();
+			$fileName = time() . md5($image->getClientOriginalName());
+			$fileExt = $image->getClientOriginalExtension();
 
-				// image path
-		$originalImagePath = public_path().'/upload/games/' . $fileName . '.' . $fileExt;
-		
-				// save original
-		$imager = new ImageManager;
-		$imager->make($image)
-				//Image::make($image)
-		->widen(400)
-		->save($originalImagePath);
+			// image path
+			$originalImagePath = public_path().'/upload/games/' . $fileName . '.' . $fileExt;
+			
+			// save original
+			$imager = new ImageManager;
+			$imager->make($image)
+				->widen(400)
+				->save($originalImagePath);
 
-		$game->file_name = $fileName;
+			$game->file_name = $fileName;
 
-		$game->file_ext = $fileExt;
+			$game->file_ext = $fileExt;
+		}
 
 		return $game;
 	}
