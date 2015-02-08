@@ -5,8 +5,8 @@
 <div style="margin-bottom: 10px;"><img src="images/banner.jpg"></div>
 
 
-
 <h4 class="text-primary">Todays Free Games</h4>
+
 
 <hr>
 
@@ -20,7 +20,13 @@
 		    <h3 class="panel-title">{{ $game->title}}</h3>
 		  </div>
 		  <div class="panel-body">
-		    <a href="{{ route('games.show', [$game->id]) }}"><img src="{{ $game->getImagePath() }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px"></a>
+		    <a href="{{ route('games.show', [$game->id]) }}">
+		    	@if($game->thumbnail)
+		    	<img src="{{ $game->thumbnail }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
+		    	@else
+		    	<img src="{{ $game->getImagePath() }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
+		   		@endif
+		    </a>
 		    
 		    <div class="row">
 		    	<div class="col-md-6 text-warning">

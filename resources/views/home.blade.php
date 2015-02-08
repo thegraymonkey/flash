@@ -40,7 +40,11 @@
 		    <h3 class="panel-title">{{ $game->title }}</h3>
 		  </div>
 		  <div class="panel-body">
-		    <img src="{{ $game->getImagePath() }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="230px">
+		    	@if($game->thumbnail)
+		    	<img src="{{ $game->thumbnail }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
+		    	@else
+		    	<img src="{{ $game->getImagePath() }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
+		   		@endif
 		    
 		    <div class="row">
 		    	<div class="col-md-6 text-warning">

@@ -33,10 +33,12 @@ class GameController extends Controller {
 		$input = Request::all();
 
 		$rules = [
-			'title' => 'required|min:5',
-			'photo' => 'required|image|max:2024',
-			'description' => 'required|min:5',
-			'code' => 'required|min:10'
+		'title' => 'required|min:5',
+		'photo' => 'image|max:2024',
+		'description' => 'min:5',
+		'code' => 'required|min:10',
+		'instructions' => 'min:5',
+		'thumbnail' => 'min:5'
 		];
 
 		$validation = Validator::make($input, $rules);
@@ -45,32 +47,22 @@ class GameController extends Controller {
 		{
 			
 			$image = Request::file('photo');
-		
-			// file name factory
-			$fileName = time() . md5($image->getClientOriginalName());
-			$fileExt = $image->getClientOriginalExtension();
-
-			// image path
-			$originalImagePath = public_path().'/upload/games/' . $fileName . '.' . $fileExt;
 			
-			// save original
-			$imager = new ImageManager;
-			$imager->make($image)
-			//Image::make($image)
-				->widen(400)
-				->save($originalImagePath);
-
+			if($image)
+			{
+				return $this->saveWithImage($image);
+			}
 			$game = new Game;
-		
+			
 			$game->title = $input['title'];
 
 			$game->description = $input['description'];
 
 			$game->code = $input['code'];
 
-			$game->file_name = $fileName;
+			$game->instructions = $input['instructions'];
 
-			$game->file_ext = $fileExt;
+			$game->thumbnail = $input['thumbnail'];
 
 			$game->user_id = Auth::user()->id;
 
@@ -106,7 +98,7 @@ class GameController extends Controller {
 	{
 		$game = Game::find($id);
 
-		return view('home')->with('game', $game);
+		return view('games/edit')->with('game', $game);
 	}
 	
 	public function update($id)
@@ -114,10 +106,12 @@ class GameController extends Controller {
 		$input = Request::all();
 
 		$rules = [
-			'title' => 'required|min:5',
-			'photo' => 'required|image|max:2024',
-			'description' => 'required|min:5',
-			'code' => 'required|min:10'
+		'title' => 'required|min:5',
+		'photo' => 'image|max:2024',
+		'description' => 'required|min:5',
+		'code' => 'required|min:10',
+		'instructions' => 'min:5',
+		'thumbnail' => 'min:5'
 		];
 
 		$validation = Validator::make($input, $rules);
@@ -126,62 +120,109 @@ class GameController extends Controller {
 		{
 			$game = Game::find($id);
 
-			$photo = Request::file('photo');
+			$image = Request::file('photo');
 
 			if ($game)
 			{
+
+				if($image)
+				{
+					// file name factory
+					$fileName = time() . md5($image->getClientOriginalName());
+					$fileExt = $image->getClientOriginalExtension();
+
+					// image path
+					$originalImagePath = public_path().'/upload/games/' . $fileName . '.' . $fileExt;
+					
+					// save original
+					$imager = new ImageManager;
+					$imager->make($image)
+					//Image::make($image)
+					->widen(400)
+					->save($originalImagePath);
+
+
+					$game->title = $input['title'];
+
+					$game->description = $input['description'];
+
+					$game->code = $input['code'];
+
+					$game->file_name = $fileName;
+
+					$game->file_ext = $fileExt;
+
+					$game->instructions = $input['instructions'];
+
+					$game->thumbnail = $input['thumbnail'];
+
+					$game->save();
+					
+					return redirect('home')->with('message', 'Game Changed!');
+					
+				}				
+
 				$game->title = $input['title'];
 
 				$game->description = $input['description'];
 
 				$game->code = $input['code'];
 
-				$game->file_name = $fileName;
+				$game->instructions = $input['instructions'];
 
-				$game->file_ext = $fileExt;
-
-				$game->user_id = Auth::user()->id;
+				$game->thumbnail = $input['thumbnail'];
 
 				$game->save();
 
-				return redirect(route('home'))->with('message', 'Game Changed!');
+				return redirect('home')->with('message', 'Game Changed!');
 			}
 
 			App::abort(400);
 		}
 
-		return redirect(route('home'))->withErrors($validation);
+		return redirect('home')->withErrors($validation);
 	}
 
-	protected function assignImage(Game $game, $file)
-	{
+	protected function saveWithImage($image){
+
+			// file name factory
+		$fileName = time() . md5($image->getClientOriginalName());
+		$fileExt = $image->getClientOriginalExtension();
+
+				// image path
+		$originalImagePath = public_path().'/upload/games/' . $fileName . '.' . $fileExt;
 		
-		if ($file)
-		{
-			$ext = $file->getClientOriginalExtension();
+				// save original
+		$imager = new ImageManager;
+		$imager->make($image)
+				//Image::make($image)
+		->widen(400)
+		->save($originalImagePath);
 
-			//!!
-			$game->file_extension = $ext;
+		$game = new Game;
+		
+		$game->title = $input['title'];
 
-			$path = public_path() . '/upload/games/';
+		$game->description = $input['description'];
 
-			$filename = time() . md5($image->getClientOriginalName());
+		$game->code = $input['code'];
 
-			//!!
-			$game->file_name = $filename;
-			
-			// save original
-			$imager = new ImageManager;
-			$imager->make($image)
-			//Image::make($image)
-				->widen(400)
-				->save($originalImagePath);
-		}
+		$game->instructions = $input['instructions'];
 
+		$game->thumbnail = $input['thumbnail'];
 
-		return $game;
+		$game->file_name = $fileName;
+
+		$game->file_ext = $fileExt;
+
+		$game->user_id = Auth::user()->id;
+
+		$game->save();
+
+		return redirect('home')->with('message', 'Game Published!');
+
 	}
 
 }
 
-	
+

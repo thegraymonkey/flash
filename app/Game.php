@@ -11,6 +11,18 @@ class Game extends Model {
 	 */
 	protected $table = 'games';
 
+
+	protected $fillable = [
+
+		'title',
+		'code',
+		'file_name',
+		'file_ext',
+		'description',
+		'instructions',
+		'thumbnail',
+	
+	];
 	/**
 	 * The attributes that are mass assignable.
 	 *

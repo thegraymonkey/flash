@@ -34,6 +34,16 @@
 				</div>
 
 				<div class="form-group">
+					<label>Game Thumbnail</label>
+					<textarea  class="form-control" name="thumbnail">{{ $game->thumbnail }}</textarea>
+				</div>
+
+				<div class="form-group">
+					<label>Game Instructions</label>
+					<textarea  class="form-control" name="instructions">{{ $game->instructions }}</textarea>
+				</div>
+
+				<div class="form-group">
 					<input class="btn btn-primary" type="submit" value="Update and Publish"/>
 				</div>
 

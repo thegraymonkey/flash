@@ -29,6 +29,16 @@
 				</div>
 
 				<div class="form-group">
+					<label>Game Thumbnail</label>
+					<textarea  class="form-control" name="thumbnail"></textarea>
+				</div>
+
+				<div class="form-group">
+					<label>Game Instructions</label>
+					<textarea  class="form-control" name="instructions"></textarea>
+				</div>
+
+				<div class="form-group">
 					<input class="btn btn-primary" type="submit" value="Publish"/>
 				</div>
 
