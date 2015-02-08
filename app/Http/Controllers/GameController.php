@@ -12,11 +12,11 @@ use Intervention\Image\ImageManager;
 
 class GameController extends Controller {
 
-	public function show(){
+	public function show($id){
 
-		//$game = Game::find($id);
+		$game = Game::find($id);
 
-		return view('games/show');//, ['game' =>$game]);
+		return view('games/show', ['game' => $game]);
 	}
 
 	public function index(){

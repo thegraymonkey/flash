@@ -6,11 +6,11 @@
 
 
 
-<h4 class="text-primary">Game Title</h4>
+<h4 class="text-primary">{{ $game->title }}</h4>
 
 
+ {!! $game->code !!} 
 
-<embed width="800" height="512" base="http://external.kongregate-games.com/gamez/0022/3733/live/" src="http://external.kongregate-games.com/gamez/0022/3733/live/embeddable_223733.swf" type="application/x-shockwave-flash"></embed><br/>
 <h4>Rate this game: * * * * * </h4>
 
 <hr>
