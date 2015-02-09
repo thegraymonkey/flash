@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div style="margin-bottom: 10px;"><img src="images/banner.jpg"></div>
+@include('common.top_adds')
 
 
 <h4 class="text-primary">Todays Free Games</h4>
@@ -51,19 +51,17 @@
   </div>
 </div>
 
-<div style="margin-bottom: 10px;"><img src="images/banner.jpg"></div>
-
-<div style="margin-bottom: 10px;"><img src="images/banner.jpg"></div>
+@include('common.bottom_adds')
 
 @stop
 
 @section('sidebar')
 
 <div style="margin-bottom:20px;">
-@include('common.sponsored')
+@include('common.pic_adds')
 </div>
 <div style="margin-bottom:20px;">
-@include('common.links')
+@include('common.link_adds')
 </div>
 <div style="margin-bottom:20px;">
 @include('common.categories')

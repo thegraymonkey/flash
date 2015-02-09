@@ -10,7 +10,9 @@ use App\Http\Controllers\Controller;
 use App;
 use Intervention\Image\ImageManager;
 
+
 class GameController extends Controller {
+
 
 	public function show($id){
 
@@ -19,6 +21,7 @@ class GameController extends Controller {
 		return view('games/show', ['game' => $game]);
 	}
 
+
 	public function index(){
 
 		$games = Game::orderBy('created_at', 'desc')->paginate(12);
@@ -26,6 +29,7 @@ class GameController extends Controller {
 		return view('home', ['games' => $games]);
 
 	}
+
 
 	public function store()
 	{
@@ -59,12 +63,9 @@ class GameController extends Controller {
 			$game->thumbnail = $input['thumbnail'];
 			
 			$game->user_id = Auth::user()->id;
+						
+			$game = $this->withImage($game, Request::file('photo'));
 			
-			if ($image)
-			{
-				$game = $this->withImage($game, Request::file('photo'));
-			}
-
 			$game->save();
 
 			return redirect('home')->with('message', 'Game Published!');
@@ -73,9 +74,9 @@ class GameController extends Controller {
 		return redirect('home')->withErrors($validation);
 	}
 
+
 	public function destroy($gameId)
 	{
-
 		if ($game = Game::find($gameId))
 		{
 			if (Auth::user())
@@ -84,14 +85,11 @@ class GameController extends Controller {
 
 				return redirect('home')->with('message', 'Game Deleted!');
 			}			
-			else
-			{
-				return redirect('home')->with('message', 'Game Does Not Exist!');
-			}
+			return redirect('home')->withErrors('message', 'You Can Not Do That!');			
 		}
-
-		App::abort(404);
+		return redirect('home')->withErrors('message', 'Game Does Not Exist!');	
 	}
+
 
 	public function edit($id)
 	{
@@ -100,6 +98,7 @@ class GameController extends Controller {
 		return view('games/edit')->with('game', $game);
 	}
 	
+
 	public function update($id)
 	{
 		$input = Request::all();
@@ -124,43 +123,6 @@ class GameController extends Controller {
 			if ($game)
 			{
 
-				if($image)
-				{
-					// file name factory
-					$fileName = time() . md5($image->getClientOriginalName());
-					$fileExt = $image->getClientOriginalExtension();
-
-					// image path
-					$originalImagePath = public_path().'/upload/games/' . $fileName . '.' . $fileExt;
-					
-					// save original
-					$imager = new ImageManager;
-					$imager->make($image)
-					//Image::make($image)
-					->widen(400)
-					->save($originalImagePath);
-
-
-					$game->title = $input['title'];
-
-					$game->description = $input['description'];
-
-					$game->code = $input['code'];
-
-					$game->file_name = $fileName;
-
-					$game->file_ext = $fileExt;
-
-					$game->instructions = $input['instructions'];
-
-					$game->thumbnail = $input['thumbnail'];
-
-					$game->save();
-					
-					return redirect('home')->with('message', 'Game Changed!');
-					
-				}				
-
 				$game->title = $input['title'];
 
 				$game->description = $input['description'];
@@ -170,17 +132,22 @@ class GameController extends Controller {
 				$game->instructions = $input['instructions'];
 
 				$game->thumbnail = $input['thumbnail'];
+				
+				$game->user_id = Auth::user()->id;
+				
+				$game = $this->withImage($game, Request::file('photo'));
 
 				$game->save();
 
 				return redirect('home')->with('message', 'Game Changed!');
 			}
 
-			App::abort(400);
+			return redirect('home')->withErrors('message', 'Game Does Not Exist!');
 		}
 
 		return redirect('home')->withErrors($validation);
 	}
+
 
 	protected function withImage(Game $game, $image)
 	{
@@ -203,9 +170,9 @@ class GameController extends Controller {
 
 			$game->file_ext = $fileExt;
 		}
-
 		return $game;
 	}
+
 
 }
 

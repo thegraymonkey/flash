@@ -2,14 +2,14 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Game extends Model {
+class Add extends Model {
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'games';
+	protected $table = 'adds';
 
 
 	
@@ -21,27 +21,19 @@ class Game extends Model {
 	protected $fillable = [
 
 		'title',
-		'code',
+		'link',
 		'file_name',
 		'file_ext',
 		'description',
-		'instructions',
+		'position',
 		'thumbnail',
 	
 	];
 
-	
-	public function categories(){
-		return $this->belongsToMany(App\Category);
-	}
-
-	public function rating(){
-		
-	}
-
 	public function getImagePath()
 	{
-		return sprintf('/upload/games/%s.%s', $this->file_name, $this->file_ext);
+		return sprintf('/upload/adds/%s.%s', $this->file_name, $this->file_ext);
 	}
-
+	
 }
+

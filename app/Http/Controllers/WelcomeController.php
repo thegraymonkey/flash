@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Add;
 use App\Game;
 use Request;
 use Auth;
@@ -40,9 +41,26 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
+		$topAdds = Add::where('position', 'top')->get();
+
+		$bottomAdds = Add::where('position', 'bottom')->get();
+
+		$picAdds = Add::where('position', 'picture')->get();
+
+		$linkAdds = Add::where('position', 'link')->get();
+
+		$adds = Add::orderBy('created_at', 'desc');
+
 		$games = Game::orderBy('created_at', 'desc')->paginate(12);
 
-		return view('welcome', ['games' => $games]);
+		return view('welcome', [
+								'games' => $games,								 
+								'adds' => $adds,		 						
+		 						'linkAdds' => $linkAdds, 
+		 						'picAdds' => $picAdds, 
+		 						'bottomAdds' => $bottomAdds, 
+		 						'topAdds' => $topAdds
+								]);
 	}
 
 }

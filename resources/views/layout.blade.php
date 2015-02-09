@@ -52,6 +52,7 @@
           </ul>
         </nav>
       </div>
+    
 
       <div class="row">
 			<div class="main col-md-9">

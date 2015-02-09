@@ -22,3 +22,5 @@ Route::controllers([
 
 $router->resource('games', 'GameController', ['only' => ['index', 'show', 'edit', 'update', 'destroy', 'store', 'create']]);
 
+$router->resource('adds', 'AddController', ['only' => ['index', 'show', 'edit', 'update', 'destroy', 'store', 'create']]);
+

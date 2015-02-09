@@ -4,26 +4,17 @@
 <div class="container">
 	
 	@include('common.messages')
-	<!--FORMS FOR ADDING GAMES AND PROMOTIONAL MATERIAL -->
-
-	@include('games.create')
-
-	<div class="row">
+<!--FORMS FOR ADDING GAMES AND PROMOTIONAL MATERIAL -->
+<div class="row">	
 	
-	@include('top_banners.create')
-	@include('bottom_banners.create')
-
+	<div class="col-md-6">
+	@include('games.create')
+	</div>
+	<div class="col-md-6">
+	@include('adds.create')
 	</div>
 
-
-
-	<div class="row">
-		
-		@include('pic_adds.create')
-		@include('link_adds.create')
-		
-	</div>
-
+</div>	
 <hr>
 
 <!-- LIST OF ITEMS ADDED TO WEBSITE -->
@@ -80,106 +71,75 @@
 
 <h4>Top Banners</h4>
 
-	<div><img src="images/banner.jpg"></div>
-	<div  style="margin-bottom: 10px;" class="row">
-				<div class="col-md-6">
-					<form action="#" method="post">
-						<input type="hidden" name="_method" value="delete">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="submit" value="Delete" class="btn btn-xs btn-danger">
-					</form>
-				</div>
-				<div class="col-md-6">
-				<a class="btn btn-xs btn-warning" href="#">Edit</a>
-				</div>	
+@foreach($topAdds as $add)
+	<div>
+	<img src="{{ $add->getImagePath() }}" class="img-responsive" alt="Responsive image">
+		<div style="margin-bottom: 10px;" class="row">
+			<div class="col-md-6">
+				<form action="{{ route('adds.destroy', [$add->id]) }}" method="post">
+					<input type="hidden" name="_method" value="delete">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="submit" value="Delete" class="btn btn-xs btn-danger">
+				</form>
 			</div>
-
-	<div><img src="images/banner.jpg"></div>
-	<div style="margin-bottom: 10px;" class="row">
-				<div class="col-md-6">
-					<form action="#" method="post">
-						<input type="hidden" name="_method" value="delete">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="submit" value="Delete" class="btn btn-xs btn-danger">
-					</form>
-				</div>
-				<div class="col-md-6">
-				<a class="btn btn-xs btn-warning" href="#">Edit</a>
-				</div>	
-			</div>
+			<div class="col-md-6">
+				<a class="btn btn-xs btn-warning" href="{{ route('adds.edit', [$add->id]) }}">Edit</a>
+			</div>	
+		</div>
+	</div>
+@endforeach
 
 <hr>
 
 <h4>Bottom Banners</h4>
 
-	<div><img src="images/banner.jpg"></div>
-	<div style="margin-bottom: 10px;" class="row">
-				<div class="col-md-6">
-					<form action="#" method="post">
-						<input type="hidden" name="_method" value="delete">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="submit" value="Delete" class="btn btn-xs btn-danger">
-					</form>
-				</div>
-				<div class="col-md-6">
-				<a class="btn btn-xs btn-warning" href="#">Edit</a>
-				</div>	
+@foreach( $bottomAdds as $add )
+	<div>
+	<img src="{{ $add->getImagePath() }}" class="img-responsive" alt="Responsive image">
+		<div style="margin-bottom: 10px;" class="row">
+			<div class="col-md-6">
+				<form action="{{ route('adds.destroy', [$add->id]) }}" method="post">
+					<input type="hidden" name="_method" value="delete">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="submit" value="Delete" class="btn btn-xs btn-danger">
+				</form>
 			</div>
-
-	<div><img src="images/banner.jpg"></div>
-	<div style="margin-bottom: 10px;" class="row">
-				<div class="col-md-6">
-					<form action="#" method="post">
-						<input type="hidden" name="_method" value="delete">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="submit" value="Delete" class="btn btn-xs btn-danger">
-					</form>
-				</div>
-				<div class="col-md-6">
-				<a class="btn btn-xs btn-warning" href="#">Edit</a>
-				</div>	
-			</div>
+			<div class="col-md-6">
+				<a class="btn btn-xs btn-warning" href="{{ route('adds.edit', [$add->id]) }}">Edit</a>
+			</div>	
+		</div>
+	</div>
+@endforeach
 
 <hr>
 
 <h4>Pic Adds</h4>
 
 <div class="row">
-
+	@foreach( $picAdds as $add )
 	<div class="col-md-3">
-	<img src="/images/image.svg" class="img-rounded img-responsive" alt="Responsive image" width="260px" height="260px">
-	This page showcases games developed by the talented Flash developers who have earned cash sponsorships from Kongregate. If you are a Flash game designer who wants to earn some money and
-	<div style="margin-bottom: 10px;" class="row">
-				<div class="col-md-6">
-					<form action="#" method="post">
-						<input type="hidden" name="_method" value="delete">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="submit" value="Delete" class="btn btn-xs btn-danger">
-					</form>
-				</div>
-				<div class="col-md-6">
-				<a class="btn btn-xs btn-warning" href="#">Edit</a>
-				</div>	
-			</div>
-	</div>
 
-	<div class="col-md-3">
-	<img src="/images/image.svg" class="img-rounded img-responsive" alt="Responsive image" width="260px" height="260px">
-	This page showcases games developed by the talented Flash developers who have earned cash sponsorships from Kongregate. If you are a Flash game designer who wants to earn some money and
-	<div style="margin-bottom: 10px;" class="row">
-				<div class="col-md-6">
-					<form action="#" method="post">
-						<input type="hidden" name="_method" value="delete">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-						<input type="submit" value="Delete" class="btn btn-xs btn-danger">
-					</form>
-				</div>
-				<div class="col-md-6">
-				<a class="btn btn-xs btn-warning" href="#">Edit</a>
-				</div>	
+		@if($add->thumbnail)
+		    <img src="{{ $add->thumbnail }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
+		@else
+		    <img src="{{ $add->getImagePath() }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
+		@endif
+		{{ $add->description}}
+		<div style="margin-bottom: 10px;" class="row">
+			<div class="col-md-6">
+				<form action="{{ route('adds.destroy', [$add->id]) }}" method="post">
+					<input type="hidden" name="_method" value="delete">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}">
+					<input type="submit" value="Delete" class="btn btn-xs btn-danger">
+				</form>
 			</div>
-	</div>
+			<div class="col-md-6">
+				<a class="btn btn-xs btn-warning" href="{{ route('adds.edit', [$add->id]) }}">Edit</a>
+			</div>	
+		</div>
 
+	</div>
+	@endforeach
 </div>
 
 <hr>
@@ -187,54 +147,22 @@
 <h4>Link Adds</h4>
 
 <div class="row">
+	@foreach($linkAdds as $add)
  	<div class="col-md-6">
- 	<p>Link name</p>
+ 		<p>{{ $add->title}}</p>
  	</div>
  	<div class="col-md-3">
-		<form action="#" method="post">
+		<form action="{{ route('adds.destroy', [$add->id]) }}" method="post">
 			<input type="hidden" name="_method" value="delete">
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<input type="submit" value="Delete" class="btn btn-xs btn-danger">
 		</form>
 	</div>
 	<div class="col-md-3">
-		<a class="btn btn-xs btn-warning" href="#">Edit</a>
-	</div>	
-</div>
-
-<div class="row">
- 	<div class="col-md-6">
- 	<p>Link name</p>
- 	</div>
- 	<div class="col-md-3">
-		<form action="#" method="post">
-			<input type="hidden" name="_method" value="delete">
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="submit" value="Delete" class="btn btn-xs btn-danger">
-		</form>
+		<a class="btn btn-xs btn-warning" href="{{ route('adds.edit', [$add->id]) }}">Edit</a>
 	</div>
-	<div class="col-md-3">
-		<a class="btn btn-xs btn-warning" href="#">Edit</a>
-	</div>	
+	@endforeach	
 </div>
-
-<div class="row">
- 	<div class="col-md-6">
- 	<p>Link name</p>
- 	</div>
- 	<div class="col-md-3">
-		<form action="#" method="post">
-			<input type="hidden" name="_method" value="delete">
-			<input type="hidden" name="_token" value="{{ csrf_token() }}">
-			<input type="submit" value="Delete" class="btn btn-xs btn-danger">
-		</form>
-	</div>
-	<div class="col-md-3">
-		<a class="btn btn-xs btn-warning" href="#">Edit</a>
-	</div>	
-</div>
-
-
 
 
 </div>

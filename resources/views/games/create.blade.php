@@ -1,5 +1,5 @@
-<div class="row">
-		<div class="col-md-10 col-md-offset-1">
+
+		
 			
 			<form class="well" method="POST" action="{{ route('games.store') }}" enctype="multipart/form-data">
 		
@@ -14,7 +14,7 @@
 				</div>
 
 				<div class="form-group">	
-					<label for="photo">Game Thumbnail</label>
+					<label for="photo">Game Image</label>
 					<input class="form-control" type="file" name="photo" id="photo">
 				</div>
 
@@ -44,5 +44,4 @@
 
 			</form>
 				
-		</div>
-	</div>
+		
