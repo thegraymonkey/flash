@@ -2,28 +2,34 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model {
+class Comment extends Model {
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'categories';
+	protected $table = 'comments';
 
+
+	
 	/**
 	 * The attributes that are mass assignable.
 	 *
 	 * @var array
 	 */
 	protected $fillable = [
-		'name'
+		
+		'name',
+		'content',
+		'game_id'
+	
 	];
 
 	
-	public function games()
+	public function game()
 	{
-		return $this->hasMany('App\Game');
+		return $this->belongsTo('App\Game');
 	}
 
 }

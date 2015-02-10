@@ -24,3 +24,9 @@ $router->resource('games', 'GameController', ['only' => ['index', 'show', 'edit'
 
 $router->resource('adds', 'AddController', ['only' => ['index', 'show', 'edit', 'update', 'destroy', 'store', 'create']]);
 
+$router->resource('comments', 'CommentController', ['only' => ['index', 'show', 'edit', 'update', 'destroy', 'store', 'create']]);
+
+$router->controller('contacts', 'ContactController');
+
+$router->resource('categories', 'CategoryController', ['only' => ['index', 'show', 'edit', 'update', 'destroy', 'store', 'create']]);
+

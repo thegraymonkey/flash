@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Comment;
+use App\Add;
 use App\Game;
 use Request;
 use Auth;
@@ -18,7 +20,30 @@ class GameController extends Controller {
 
 		$game = Game::find($id);
 
-		return view('games/show', ['game' => $game]);
+		$comments = Comment::where('game_id', $game->getKey())->paginate(10);
+
+		$topAdds = Add::where('position', 'top')->get();
+
+		$bottomAdds = Add::where('position', 'bottom')->get();
+
+		$picAdds = Add::where('position', 'picture')->get();
+
+		$linkAdds = Add::where('position', 'link')->get();
+
+		$adds = Add::orderBy('created_at', 'desc');
+
+		
+
+		return view('games/show', [
+									'game' => $game, 
+									'adds' => $adds,		 						
+		 							'linkAdds' => $linkAdds, 
+		 							'picAdds' => $picAdds, 
+		 							'bottomAdds' => $bottomAdds, 
+		 							'topAdds' => $topAdds,
+		 							'comments' => $comments,
+		 							'current_page' => '/'
+									]);
 	}
 
 
@@ -42,7 +67,8 @@ class GameController extends Controller {
 		'description' => 'min:5',
 		'code' => 'required|min:10',
 		'instructions' => 'min:5',
-		'thumbnail' => 'min:5'
+		'thumbnail' => 'min:5',
+		'category_id' => 'required'
 		];
 
 		$validation = Validator::make($input, $rules);
@@ -61,6 +87,8 @@ class GameController extends Controller {
 			$game->instructions = $input['instructions'];
 
 			$game->thumbnail = $input['thumbnail'];
+
+			$game->category_id = $input['category_id'];
 			
 			$game->user_id = Auth::user()->id;
 						
@@ -109,7 +137,8 @@ class GameController extends Controller {
 		'description' => 'required|min:5',
 		'code' => 'required|min:10',
 		'instructions' => 'min:5',
-		'thumbnail' => 'min:5'
+		'thumbnail' => 'min:5',
+		'category_id' => 'required'
 		];
 
 		$validation = Validator::make($input, $rules);
@@ -132,6 +161,8 @@ class GameController extends Controller {
 				$game->instructions = $input['instructions'];
 
 				$game->thumbnail = $input['thumbnail'];
+
+				$game->category_id = $input['category_id'];
 				
 				$game->user_id = Auth::user()->id;
 				

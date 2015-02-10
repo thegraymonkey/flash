@@ -1,9 +1,10 @@
 @extends('layout')
 
+
+
 @section('content')
 
-<div style="margin-bottom: 10px;"><img src="../images/banner.jpg"></div>
-
+@include('common.top_adds')
 
 
 <h4 class="text-primary">{{ $game->title }}</h4>
@@ -14,96 +15,63 @@
 <p class="text-warning well"><strong>Instructions: </strong>{{ $game->instructions }}</p>
 <p class="text-primary well"><strong>Description: </strong>{{ $game->description }}</p>
 
-<h4>Rate this game: * * * * * </h4>
+<div style="margin-bottom:50px" class"row">
+	<div class="col-md-3">
+		<h4>Rate this game: </h4>
+	</div>
+	<div class="col-md-3">
+		@include('ratings.create') 
+	</div>
+	<div class="col-md-3">
+		<h4>Current Rating: </h4>
+	</div>
+	<div class="col-md-3">		 
+	</div>
+</div>
+
 
 <hr>
 
+@include('common.messages')
+
+@include('comments.create')
 
 
-<form class="well" method="POST" action="#">
-	
-	<div class="form-group">
-		<label>Wanna leave a comment?</label>
-		<textarea  class="form-control" name="content"></textarea>
-	</div>
-	<div class="form-group">
-		<input class="btn btn-primary" type="submit" value="Leave comment"/>
-	</div>
-
-</form>
-
-
-<table class="table well" >
-	
+<table class="table" >
+	@foreach($comments as $comment)
 	<tr>
 		<td width="8%">				
 			<img src="../images/blank.png"/>			
 		</td>
-		<td width="10%">					
-			<small>06.11.2013.</small>
+		<td width="13%">
+			<small>{{ $comment->name }}</small> </br>	
+			<small>{{ $comment->created_at->diffForHumans() }}</small>
 		</td>
-		<td width="68%">Comentar ko i svaki komentar ... :) yeah that was insane</td>
+		<td width="65%">{{ $comment->content}}</td>
 		<td width="8%">	
 			@if(Auth::check())		
-			<form action="#" method="post">
-				<input type="hidden" name="#" value="#">
+			<form action="{{ route('comments.destroy', [$comment->id]) }}" method="post">
 				<input type="hidden" name="_method" value="delete">
-				<input type="hidden" name="#" value="#">
+				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<input type="submit" value="Delete" class="btn btn-xs btn-danger">
 			</form>	
 			@endif		
 		</td>		
 	</tr>
-	<tr>
-		<td width="8%">				
-			<img src="../images/blank.png"/>			
-		</td>
-		<td width="10%">					
-			<small>06.11.2013.</small>
-		</td>
-		<td width="68%">Comentar ko i svaki komentar ... :) yeah that was insane</td>
-		<td width="8%">			
-			<form action="#" method="post">
-				<input type="hidden" name="#" value="#">
-				<input type="hidden" name="_method" value="delete">
-				<input type="hidden" name="#" value="#">
-				<input type="submit" value="Delete" class="btn btn-xs btn-danger">
-			</form>			
-		</td>		
-	</tr>
-	<tr>
-		<td width="8%">				
-			<img src="../images/blank.png"/>			
-		</td>
-		<td width="10%">					
-			<small>06.11.2013.</small>
-		</td>
-		<td width="68%">Comentar ko i svaki komentar ... :) yeah that was insane</td>
-		<td width="8%">			
-			<form action="#" method="post">
-				<input type="hidden" name="#" value="#">
-				<input type="hidden" name="_method" value="delete">
-				<input type="hidden" name="#" value="#">
-				<input type="submit" value="Delete" class="btn btn-xs btn-danger">
-			</form>			
-		</td>		
-	</tr>
-
+	@endforeach
 </table>
 
-<div style="margin-bottom: 10px;"><img src="../images/banner.jpg"></div>
-
-<div style="margin-bottom: 10px;"><img src="../images/banner.jpg"></div>
+@include('common.bottom_adds')
 
 @stop
 
 @section('sidebar')
 
 <div style="margin-bottom:20px;">
-@include('common.sponsored')
+@include('common.pic_adds')
 </div>
 <div style="margin-bottom:20px;">
-@include('common.links')
+@include('common.link_adds')
 </div>
 <div style="margin-bottom:20px;">
 @include('common.categories')
@@ -113,4 +81,5 @@
 </div>
 
 @stop
+
 

@@ -13,8 +13,18 @@
 	<div class="col-md-6">
 	@include('adds.create')
 	</div>
-
+	<div class="col-md-6">
+	@include('categories.create')
+	</div>
+	
 </div>	
+
+
+	
+	
+	
+
+	
 <hr>
 
 <!-- LIST OF ITEMS ADDED TO WEBSITE -->
@@ -31,12 +41,13 @@
 		    <h3 class="panel-title">{{ $game->title }}</h3>
 		  </div>
 		  <div class="panel-body">
+		  		<a href="{{ route('games.show', [$game->id]) }}">
 		    	@if($game->thumbnail)
 		    	<img src="{{ $game->thumbnail }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
 		    	@else
 		    	<img src="{{ $game->getImagePath() }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
 		   		@endif
-		    
+		    	</a>
 		    <div class="row">
 		    	<div class="col-md-6 text-warning">
 		    		Rating: *****
@@ -66,6 +77,30 @@
 @endforeach
 
 </div>
+
+<hr>
+
+<h4>Categories</h4>
+
+@foreach($categories as $category)
+<div class="row">
+
+	<div class="col-md-4">
+		<h5>{{ $category->name }}</h5>
+	</div>
+	<div class="col-md-4">
+		<form action="{{ route('categories.destroy', [$category->id]) }}" method="post">
+			<input type="hidden" name="_method" value="delete">
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<input type="submit" value="Delete" class="btn btn-xs btn-danger">
+		</form>
+	</div>
+	<div class="col-md-4">
+		<a class="btn btn-xs btn-warning" href="{{ route('categories.edit', [$category->id]) }}">Edit</a>
+	</div>	
+
+</div>
+@endforeach
 
 <hr>
 

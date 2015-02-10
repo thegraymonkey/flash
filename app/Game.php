@@ -27,16 +27,24 @@ class Game extends Model {
 		'description',
 		'instructions',
 		'thumbnail',
+		'category_id'
 	
 	];
 
 	
-	public function categories(){
-		return $this->belongsToMany(App\Category);
+	public function categories()
+	{
+		return $this->belongsTo('App\Category');
 	}
 
-	public function rating(){
-		
+	public function comments()
+	{
+		return $this->hasMany('App\Comment');
+	}
+
+	public function ratings()
+	{
+		return $this->hasMany('App\Rating');
 	}
 
 	public function getImagePath()

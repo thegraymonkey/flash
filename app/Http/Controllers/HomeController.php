@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+
+use App\Category;
 use App\Add;
 use App\Game;
 use Request;
@@ -53,13 +55,16 @@ class HomeController extends Controller {
 
 		$games = Game::orderBy('created_at', 'desc')->paginate(12);
 
+		$categories = Category::all();
+
 		return view('home', [
 								'games' => $games, 
 								'adds' => $adds,		 						
 		 						'linkAdds' => $linkAdds, 
 		 						'picAdds' => $picAdds, 
 		 						'bottomAdds' => $bottomAdds, 
-		 						'topAdds' => $topAdds
+		 						'topAdds' => $topAdds,
+		 						'categories' => $categories
 		 					]);		
 	}
 
