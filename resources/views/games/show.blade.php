@@ -22,10 +22,34 @@
 	<div class="col-md-3">
 		@include('ratings.create') 
 	</div>
+
 	<div class="col-md-3">
 		<h4>Current Rating: </h4>
 	</div>
-	<div class="col-md-3">		 
+	<div class="col-md-3">
+		@if($game->rating == 1)
+		<img src="../images/star.png">
+		@elseif($game->rating == 2)
+		<img src="../images/star.png">
+		<img src="../images/star.png">
+		@elseif($game->rating == 3)
+		<img src="../images/star.png">
+		<img src="../images/star.png">
+		<img src="../images/star.png">
+		@elseif($game->rating == 4)
+		<img src="../images/star.png">
+		<img src="../images/star.png">
+		<img src="../images/star.png">
+		<img src="../images/star.png">
+		@elseif($game->rating == 5)
+		<img src="../images/star.png">
+		<img src="../images/star.png">
+		<img src="../images/star.png">
+		<img src="../images/star.png">
+		<img src="../images/star.png">
+		@else(!$game->rating)
+		<h4>No Rating Yet...</h4>
+		@endif
 	</div>
 </div>
 

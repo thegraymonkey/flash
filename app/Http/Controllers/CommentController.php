@@ -63,9 +63,9 @@ class CommentController extends Controller {
 
 				return Redirect::back()->with('message', 'Comment Deleted!');
 			}			
-			return Redirect::back()->withErrors('message', 'You Can Not Do That!');			
+			return Redirect::back()->withErrors('You Can Not Do That!');			
 		}
-		return Redirect::back()->withErrors('message', 'Comment Does Not Exist!');	
+		return Redirect::back()->withErrors('Comment Does Not Exist!');	
 	}
 	
 }

@@ -46,7 +46,7 @@
         <nav>
           <ul class="nav nav-justified">
             <li @if($current_page === '/')class="active"@endif><a href="{{ url('/') }}">Home</a></li>
-            <li><a href="#">Top Rated</a></li>
+            <li @if($current_page === 'tops.index')class="active"@endif><a href="{{ url('tops') }}">Top Rated</a></li>
             <li><a href="#">Popular</a></li>
             
             <li @if($current_page === 'contacts.show')class="active"@endif><a href="{{ url('contacts/show') }}">Contact</a></li>

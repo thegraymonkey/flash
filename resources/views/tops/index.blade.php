@@ -5,8 +5,7 @@
 @include('common.top_adds')
 
 
-<h4 class="text-primary">Todays Free Games</h4>
-
+<h4 class="text-warning">Top Rated Games</h4>
 
 <hr>
 

@@ -26,7 +26,19 @@ $router->resource('adds', 'AddController', ['only' => ['index', 'show', 'edit', 
 
 $router->resource('comments', 'CommentController', ['only' => ['index', 'show', 'edit', 'update', 'destroy', 'store', 'create']]);
 
+$router->resource('categories', 'CategoryController', ['only' => ['index', 'show', 'edit', 'update', 'destroy', 'store', 'create']]);
+
+
+$router->resource('ratings', 'RatingController', ['only' => ['index', 'show', 'edit', 'update', 'destroy', 'store', 'create']]);
+
+App\Rating::observe(new App\RatingObserver);
+
+
+$router->resource('tops', 'TopController', ['only' => ['index']]);
+
+$router->resource('archives', 'ArchiveController', ['only' => ['show']]);
+
 $router->controller('contacts', 'ContactController');
 
-$router->resource('categories', 'CategoryController', ['only' => ['index', 'show', 'edit', 'update', 'destroy', 'store', 'create']]);
+
 

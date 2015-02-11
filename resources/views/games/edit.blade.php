@@ -44,6 +44,15 @@
 				</div>
 
 				<div class="form-group">
+					<label>Game Category</label>				
+					<select class="form-control" name="category_id">
+						@foreach($categories as $category)
+						<option value="{{ $category->id }}">{{ $category->name }}</option>
+						@endforeach
+					</select>
+				</div> 
+				
+				<div class="form-group">
 					<input class="btn btn-primary" type="submit" value="Update and Publish"/>
 				</div>
 

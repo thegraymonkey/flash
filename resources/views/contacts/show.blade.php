@@ -6,7 +6,7 @@
 
 @include('common.messages')
 
-<h4 class="text-primary">Send us an email...</h4>
+<h4 class="text-info">Send us an email...</h4>
 
 <div class="well well-lg">
 

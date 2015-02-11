@@ -2,14 +2,14 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Game extends Model {
+class Rating extends Model {
 
 	/**
 	 * The database table used by the model.
 	 *
 	 * @var string
 	 */
-	protected $table = 'ratingss';
+	protected $table = 'ratings';
 
 
 	
@@ -20,7 +20,9 @@ class Game extends Model {
 	 */
 	protected $fillable = [
 
-		'rating'
+		'rating',
+		'game_id',
+		'user_ip'
 	
 	];
 

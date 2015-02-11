@@ -5,6 +5,7 @@ use View;
 use Request;
 use Mail;
 use Validator;
+use App\Category;
 
 class ContactController extends Controller {
 
@@ -20,13 +21,16 @@ class ContactController extends Controller {
 
 		$linkAdds = Add::where('position', 'link')->get();
 
+		$categories = Category::all();
+
 		return view('contacts.show', [
 
 			'current_page' => 'contacts.show',
 			'linkAdds' => $linkAdds, 
 		 	'picAdds' => $picAdds, 
 		 	'bottomAdds' => $bottomAdds, 
-		 	'topAdds' => $topAdds
+		 	'topAdds' => $topAdds,
+		 	'categories' => $categories
 
 			]);
 	}

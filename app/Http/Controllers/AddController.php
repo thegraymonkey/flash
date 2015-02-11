@@ -100,9 +100,9 @@ class AddController extends Controller {
 
 				return redirect('home')->with('message', 'Add Deleted!');
 			}			
-			return redirect('home')->withErrors('message', 'You Can Not Do That!');			
+			return redirect('home')->withErrors('You Can Not Do That!');			
 		}
-		return redirect('home')->withErrors('message', 'Add Does Not Exist!');	
+		return redirect('home')->withErrors('Add Does Not Exist!');	
 	}	
 	
 
@@ -159,7 +159,7 @@ class AddController extends Controller {
 				return redirect('home')->with('message', 'Add Changed!');
 			}
 
-			return redirect('home')->withErrors('message', 'Add Does Not Exist!');
+			return redirect('home')->withErrors('Add Does Not Exist!');
 		}
 
 		return redirect('home')->withErrors($validation);

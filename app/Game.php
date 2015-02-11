@@ -52,4 +52,8 @@ class Game extends Model {
 		return sprintf('/upload/games/%s.%s', $this->file_name, $this->file_ext);
 	}
 
+	public function getRating()
+	{
+		
+	}
 }

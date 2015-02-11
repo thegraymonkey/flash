@@ -4,9 +4,7 @@
 
 @include('common.top_adds')
 
-
-<h4 class="text-primary">Todays Free Games</h4>
-
+<h4 class="text-success">Archives: {{ $month }}</h4>
 
 <hr>
 
@@ -26,8 +24,7 @@
 		    	@else
 		    	<img src="{{ $game->getImagePath() }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
 		   		@endif
-		    </a>
-		    
+		    </a>		    
 		    <div class="row">
 		    	<div class="col-md-6 text-warning">
 		    		@if($game->rating)

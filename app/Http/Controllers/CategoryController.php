@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 
+use App\Add;
 use App\Category;
 use App\Game;
 use Request;
@@ -16,9 +17,37 @@ use Intervention\Image\ImageManager;
 class CategoryController extends Controller {
 
 
-	public function index(){
+	public function show($id)
+	{
+		$category = Category::find($id);
 
+		$categories = Category::all();
 
+		$topAdds = Add::where('position', 'top')->get();
+
+		$bottomAdds = Add::where('position', 'bottom')->get();
+
+		$picAdds = Add::where('position', 'picture')->get();
+
+		$linkAdds = Add::where('position', 'link')->get();
+
+		$games = Game::where('category_id', $category->id )->paginate(12);
+
+		return view('categories/show', [
+									'category' => $category,
+									'linkAdds' => $linkAdds, 
+		 							'picAdds' => $picAdds, 
+		 							'bottomAdds' => $bottomAdds, 
+		 							'topAdds' => $topAdds,
+		 							'current_page' => '/',
+		 							'categories' => $categories,
+		 							'games' => $games
+
+								]);
+	}
+
+	public function index()
+	{
 
 		$categories = Category::orderBy('created_at', 'desc');
 
@@ -64,9 +93,9 @@ class CategoryController extends Controller {
 
 				return redirect('home')->with('message', 'Category Deleted!');
 			}			
-			return redirect('home')->withErrors('message', 'You Can Not Do That!');			
+			return redirect('home')->withErrors('You Can Not Do That!');			
 		}
-		return redirect('home')->withErrors('message', 'Category Does Not Exist!');	
+		return redirect('home')->withErrors('Category Does Not Exist!');	
 	}
 
 
@@ -104,7 +133,7 @@ class CategoryController extends Controller {
 				return redirect('home')->with('message', 'Category Changed!');
 			}
 
-			return redirect('home')->withErrors('message', 'Category Does Not Exist!');
+			return redirect('home')->withErrors('Category Does Not Exist!');
 		}
 
 		return redirect('home')->withErrors($validation);

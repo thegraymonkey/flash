@@ -1,5 +1,6 @@
-<form class="form-inline" method="POST" action="{{ route('adds.store') }}" enctype="multipart/form-data">
-		
+<form class="form-inline" method="POST" action="{{ route('ratings.store') }}" enctype="multipart/form-data">
+	
+	<input type="hidden" name="game_id" value="{{ $game->id }}">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">	
 
 	<div class="form-group">

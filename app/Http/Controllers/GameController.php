@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+
+use App\Category;
 use App\Comment;
 use App\Add;
 use App\Game;
@@ -32,7 +34,7 @@ class GameController extends Controller {
 
 		$adds = Add::orderBy('created_at', 'desc');
 
-		
+		$categories = Category::all();
 
 		return view('games/show', [
 									'game' => $game, 
@@ -42,7 +44,8 @@ class GameController extends Controller {
 		 							'bottomAdds' => $bottomAdds, 
 		 							'topAdds' => $topAdds,
 		 							'comments' => $comments,
-		 							'current_page' => '/'
+		 							'current_page' => '/',
+		 							'categories' => $categories
 									]);
 	}
 
@@ -113,9 +116,9 @@ class GameController extends Controller {
 
 				return redirect('home')->with('message', 'Game Deleted!');
 			}			
-			return redirect('home')->withErrors('message', 'You Can Not Do That!');			
+			return redirect('home')->withErrors('You Can Not Do That!');			
 		}
-		return redirect('home')->withErrors('message', 'Game Does Not Exist!');	
+		return redirect('home')->withErrors('Game Does Not Exist!');	
 	}
 
 
@@ -123,7 +126,12 @@ class GameController extends Controller {
 	{
 		$game = Game::find($id);
 
-		return view('games/edit')->with('game', $game);
+		$categories = Category::all();
+
+		return view('games/edit',[
+									'game' => $game, 
+		 							'categories' => $categories
+									]);
 	}
 	
 
@@ -173,7 +181,7 @@ class GameController extends Controller {
 				return redirect('home')->with('message', 'Game Changed!');
 			}
 
-			return redirect('home')->withErrors('message', 'Game Does Not Exist!');
+			return redirect('home')->withErrors('Game Does Not Exist!');
 		}
 
 		return redirect('home')->withErrors($validation);
