@@ -1,38 +1,18 @@
 <?php namespace App\Http\Controllers;
 
-use App\Add;
+
 use View;
 use Request;
 use Mail;
 use Validator;
-use App\Category;
+
 
 class ContactController extends Controller {
 
 
 	public function getShow()
 	{
-
-		$topAdds = Add::where('position', 'top')->get();
-
-		$bottomAdds = Add::where('position', 'bottom')->get();
-
-		$picAdds = Add::where('position', 'picture')->get();
-
-		$linkAdds = Add::where('position', 'link')->get();
-
-		$categories = Category::all();
-
-		return view('contacts.show', [
-
-			'current_page' => 'contacts.show',
-			'linkAdds' => $linkAdds, 
-		 	'picAdds' => $picAdds, 
-		 	'bottomAdds' => $bottomAdds, 
-		 	'topAdds' => $topAdds,
-		 	'categories' => $categories
-
-			]);
+		return view('contacts.show', ['current_page' => 'contacts.show']);
 	}
 
 	public function postSend()

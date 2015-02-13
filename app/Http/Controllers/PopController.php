@@ -9,8 +9,6 @@ use View;
 use App\User;
 use App\Http\Controllers\Controller;
 use App;
-use App\Add;
-use App\Category;
 
 
 class PopController extends Controller {
@@ -18,29 +16,12 @@ class PopController extends Controller {
 
 	public function index()
 	{
-		$topAdds = Add::where('position', 'top')->get();
-
-		$bottomAdds = Add::where('position', 'bottom')->get();
-
-		$picAdds = Add::where('position', 'picture')->get();
-
-		$linkAdds = Add::where('position', 'link')->get();
-
-		$adds = Add::orderBy('created_at', 'desc');
-
-		$categories = Category::all();
 
 		$games = Game::orderBy('views', 'desc')->paginate(12);
 
 		return view('pops.index', [
-									'games' => $games,
-									'adds' => $adds,		 						
-		 							'linkAdds' => $linkAdds, 
-		 							'picAdds' => $picAdds, 
-		 							'bottomAdds' => $bottomAdds, 
-		 							'topAdds' => $topAdds,
-		 							'current_page' => 'pops.index',
-		 							'categories' => $categories
+									'games' => $games,									
+		 							'current_page' => 'pops.index'
 									]);
 
 	}

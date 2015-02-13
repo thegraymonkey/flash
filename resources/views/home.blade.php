@@ -19,12 +19,6 @@
 	
 </div>	
 
-
-	
-	
-	
-
-	
 <hr>
 
 <!-- LIST OF ITEMS ADDED TO WEBSITE -->
@@ -50,10 +44,18 @@
 		    	</a>
 		    <div class="row">
 		    	<div class="col-md-6 text-warning">
-		    		Rating: *****
+		    		@if($game->rating)
+		    		Rating: {{ $game->rating}}
+		    		@else
+		    		Rating: X
+		    		@endif
 		    	</div>
 		    	<div class="col-md-6 text-warning">
-		    		Views: *****
+		    		@if($game->views)
+		    		Views: {{ $game->views}}
+		    		@else
+		    		Views: X
+		    		@endif
 		    	</div>
 		    </div>
 
@@ -181,8 +183,9 @@
 
 <h4>Link Adds</h4>
 
+@foreach($linkAdds as $add)
 <div class="row">
-	@foreach($linkAdds as $add)
+	
  	<div class="col-md-6">
  		<p>{{ $add->title}}</p>
  	</div>
@@ -196,11 +199,11 @@
 	<div class="col-md-3">
 		<a class="btn btn-xs btn-warning" href="{{ route('adds.edit', [$add->id]) }}">Edit</a>
 	</div>
-	@endforeach	
+		
 </div>
+@endforeach
 
 
-</div>
 
 
 @endsection

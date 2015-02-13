@@ -1,7 +1,6 @@
 <?php namespace App\Http\Controllers;
 
 
-use App\Add;
 use App\Category;
 use App\Game;
 use Request;
@@ -21,40 +20,15 @@ class CategoryController extends Controller {
 	{
 		$category = Category::find($id);
 
-		$categories = Category::all();
-
-		$topAdds = Add::where('position', 'top')->get();
-
-		$bottomAdds = Add::where('position', 'bottom')->get();
-
-		$picAdds = Add::where('position', 'picture')->get();
-
-		$linkAdds = Add::where('position', 'link')->get();
-
 		$games = Game::where('category_id', $category->id )->paginate(12);
 
 		return view('categories/show', [
 									'category' => $category,
-									'linkAdds' => $linkAdds, 
-		 							'picAdds' => $picAdds, 
-		 							'bottomAdds' => $bottomAdds, 
-		 							'topAdds' => $topAdds,
 		 							'current_page' => '/',
-		 							'categories' => $categories,
 		 							'games' => $games
 
 								]);
 	}
-
-	public function index()
-	{
-
-		$categories = Category::orderBy('created_at', 'desc');
-
-		return view('home', ['categories' => $categories]);
-
-	}
-
 
 	public function store()
 	{
@@ -69,7 +43,7 @@ class CategoryController extends Controller {
 
 		if ($validation->passes())
 		{
-			
+				
 			$category = new Category;
 
 			$category->fill($input);
@@ -120,8 +94,6 @@ class CategoryController extends Controller {
 		if ($validation->passes())
 		{
 			$category = Category::find($id);
-
-			$image = Request::file('photo');
 
 			if ($category)
 			{

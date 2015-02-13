@@ -1,9 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use Event;
-use App\Category;
 use App\Comment;
-use App\Add;
 use App\Game;
 use Request;
 use Auth;
@@ -24,30 +22,12 @@ class GameController extends Controller {
 
 		$comments = Comment::where('game_id', $game->getKey())->paginate(10);
 
-		$topAdds = Add::where('position', 'top')->get();
-
-		$bottomAdds = Add::where('position', 'bottom')->get();
-
-		$picAdds = Add::where('position', 'picture')->get();
-
-		$linkAdds = Add::where('position', 'link')->get();
-
-		$adds = Add::orderBy('created_at', 'desc');
-
-		$categories = Category::all();
-
 		$this->countView($game->id);
 
 		return view('games.show', [
-									'game' => $game, 
-									'adds' => $adds,		 						
-		 							'linkAdds' => $linkAdds, 
-		 							'picAdds' => $picAdds, 
-		 							'bottomAdds' => $bottomAdds, 
-		 							'topAdds' => $topAdds,
+									'game' => $game, 									
 		 							'comments' => $comments,
-		 							'current_page' => '/',
-		 							'categories' => $categories
+		 							'current_page' => '/'	 							
 									]);
 	}
 
@@ -59,14 +39,6 @@ class GameController extends Controller {
 		{
 			ViewModel::create(['game_id' => $gameId, 'user_ip' => ip2long(Request::getClientIp())]);
 		}
-	}
-
-	public function index(){
-
-		$games = Game::orderBy('created_at', 'desc')->paginate(12);
-
-		return view('home', ['games' => $games]);
-
 	}
 
 

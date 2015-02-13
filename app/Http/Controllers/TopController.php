@@ -18,29 +18,12 @@ class TopController extends Controller {
 
 	public function index()
 	{
-		$topAdds = Add::where('position', 'top')->get();
-
-		$bottomAdds = Add::where('position', 'bottom')->get();
-
-		$picAdds = Add::where('position', 'picture')->get();
-
-		$linkAdds = Add::where('position', 'link')->get();
-
-		$adds = Add::orderBy('created_at', 'desc');
-
-		$categories = Category::all();
 
 		$games = Game::orderBy('rating', 'desc')->paginate(12);
 
 		return view('tops.index', [
-									'games' => $games,
-									'adds' => $adds,		 						
-		 							'linkAdds' => $linkAdds, 
-		 							'picAdds' => $picAdds, 
-		 							'bottomAdds' => $bottomAdds, 
-		 							'topAdds' => $topAdds,
-		 							'current_page' => 'tops.index',
-		 							'categories' => $categories
+									'games' => $games,									
+		 							'current_page' => 'tops.index'		 							
 									]);
 
 	}

@@ -1,6 +1,8 @@
 <?php namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Add;
+use App\Category;
 
 class AppServiceProvider extends ServiceProvider {
 
@@ -11,8 +13,32 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		//
-	}
+		view()->composer('common.top_adds', function($view)
+		{
+			$view->with('topAdds', Add::where('position', 'top')->get());
+		});
+
+		view()->composer('common.bottom_adds', function($view)
+		{
+			$view->with('bottomAdds', Add::where('position', 'bottom')->get());
+		});
+
+		view()->composer('common.pic_adds', function($view)
+		{
+			$view->with('picAdds', Add::where('position', 'picture')->get());
+		});
+
+		view()->composer('common.link_adds', function($view)
+		{
+			$view->with('linkAdds', Add::where('position', 'link')->get());
+		});
+
+		view()->composer('common.categories', function($view)
+		{
+			$view->with('categories', Category::all());
+		});
+
+}
 
 	/**
 	 * Register any application services.

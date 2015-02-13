@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Flash Porn Games</title>
+    <title>Your Flash Games</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -36,10 +36,10 @@
 
       <div class="masthead" style="margin-bottom:30px;">
         <!--<h3 class="text-muted">Project name</h3>-->
-        <img src="/images/porngames.jpg" alt="Flash Porn Games">
+        <img src="/images/logo1.png" alt="Flash Porn Games">
         <form class="navbar-form navbar-right" role="search" method="GET" action="{{ route('search.index') }}">
 		      <div class="form-group">
-		        <input type="text" class="form-control" name="query" placeholder="Type name of the game">
+		        <input type="text" class="form-control" name="query" placeholder="Type name of the game" required autofocus>
 		      </div>
 		      <button type="submit" class="btn btn-success">Search</button>
 		    </form>

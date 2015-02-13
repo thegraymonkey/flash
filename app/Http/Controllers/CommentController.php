@@ -15,17 +15,6 @@ use App;
 class CommentController extends Controller {
 
 
-	public function index(){
-
-		//$gameComments = Comment::where('game_id', $game->getKey())->get();
-
-		$comments = Comment::where('game_id', $game->getKey())->paginate(10);
-
-		return view('games.show', ['comments' => $comments]);
-
-	}
-
-
 	public function store(){
 
 		$input = Request::all();

@@ -1,8 +1,6 @@
 <?php namespace App\Http\Controllers;
 
 
-use App\Category;
-use App\Add;
 use App\Game;
 use Request;
 use Auth;

@@ -14,36 +14,6 @@ use Intervention\Image\ImageManager;
 class AddController extends Controller {
 
 
-	public function show($id){
-
-		$add = Add::find($id);
-
-		return view('adds/show', ['add' => $add]);
-	}
-
-
-	public function index(){
-
-		$topAdds = Add::where('position', 'top')->get();
-
-		$bottomAdds = Add::where('position', 'bottom')->get();
-
-		$picAdds = Add::where('position', 'picture')->get();
-
-		$linkAdds = Add::where('position', 'link')->get();
-
-		$adds = Add::orderBy('created_at', 'desc');
-
-		return view('home', [								
-		 						'adds' => $adds, 
-		 						'linkAdds' => $linkAdds, 
-		 						'picAdds' => $picAdds, 
-		 						'bottomAdds' => $bottomAdds, 
-		 						'topAdds' => $topAdds
-		 					]);
-	}
-
-
 	public function store()
 	{
 		// validation

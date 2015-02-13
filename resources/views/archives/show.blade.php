@@ -10,7 +10,6 @@
 
 <div class="row">
 
-
 @foreach($games as $game)
 
 	<div class="col-md-4">
@@ -25,7 +24,8 @@
 		    	@else
 		    	<img src="../images/noimage.jpg" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
 		   		@endif
-		    </a>		    
+		    </a>
+		    
 		    <div class="row">
 		    	<div class="col-md-6 text-warning">
 		    		@if($game->rating)
