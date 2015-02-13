@@ -37,17 +37,17 @@
       <div class="masthead" style="margin-bottom:30px;">
         <!--<h3 class="text-muted">Project name</h3>-->
         <img src="/images/porngames.jpg" alt="Flash Porn Games">
-        <form class="navbar-form navbar-right" role="search">
-		  <div class="form-group">
-		    <input type="text" class="form-control" placeholder="Type name of the game">
-		  </div>
-		  <button type="submit" class="btn btn-success">Submit</button>
-		</form>
+        <form class="navbar-form navbar-right" role="search" method="GET" action="{{ route('search.index') }}">
+		      <div class="form-group">
+		        <input type="text" class="form-control" name="query" placeholder="Type name of the game">
+		      </div>
+		      <button type="submit" class="btn btn-success">Search</button>
+		    </form>
         <nav>
           <ul class="nav nav-justified">
             <li @if($current_page === '/')class="active"@endif><a href="{{ url('/') }}">Home</a></li>
             <li @if($current_page === 'tops.index')class="active"@endif><a href="{{ url('tops') }}">Top Rated</a></li>
-            <li><a href="#">Popular</a></li>
+            <li @if($current_page === 'pops.index')class="active"@endif><a href="{{ url('pops') }}">Popular</a></li>
             
             <li @if($current_page === 'contacts.show')class="active"@endif><a href="{{ url('contacts/show') }}">Contact</a></li>
           </ul>

@@ -4,12 +4,13 @@
 
 @include('common.top_adds')
 
-<h4 class="text-danger">Category: {{ $category->name }}</h4>
+
+<h4 class="text-success">Search Results For: {{ $query }}</h4>
 
 <hr>
 
 <div class="row">
-@if($games)
+
 @foreach($games as $game)
 
 	<div class="col-md-4">
@@ -24,7 +25,8 @@
 		    	@else
 		    	<img src="{{ $game->getImagePath() }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
 		   		@endif
-		    </a>		    
+		    </a>
+		    
 		    <div class="row">
 		    	<div class="col-md-6 text-warning">
 		    		@if($game->rating)
@@ -47,25 +49,17 @@
 	</div>
 
 @endforeach
-@else
-<h4>nesto</h4>
-@endif
+
 </div>
 
-<div class="row">
-  <div class="col-md-4 col-md-offset-4">
-	{!! $games->render() !!}
-  </div>
-</div>
+
 
 @include('common.bottom_adds')
 
 @stop
 
 @section('sidebar')
-<div style="margin-bottom:20px;">
-@include('common.categories')
-</div>
+
 <div style="margin-bottom:20px;">
 @include('common.pic_adds')
 </div>
@@ -73,6 +67,10 @@
 @include('common.link_adds')
 </div>
 <div style="margin-bottom:20px;">
+@include('common.categories')
+</div>
+<div style="margin-bottom:20px;">
 @include('common.archives')
 </div>
+
 @stop

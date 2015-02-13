@@ -28,17 +28,22 @@ $router->resource('comments', 'CommentController', ['only' => ['index', 'show', 
 
 $router->resource('categories', 'CategoryController', ['only' => ['index', 'show', 'edit', 'update', 'destroy', 'store', 'create']]);
 
-
 $router->resource('ratings', 'RatingController', ['only' => ['index', 'show', 'edit', 'update', 'destroy', 'store', 'create']]);
 
-App\Rating::observe(new App\RatingObserver);
-
+$router->resource('search', 'SearchController', ['only' => ['index', 'show', 'edit', 'update', 'destroy', 'store', 'create']]);
 
 $router->resource('tops', 'TopController', ['only' => ['index']]);
+
+$router->resource('pops', 'PopController', ['only' => ['index']]);
 
 $router->resource('archives', 'ArchiveController', ['only' => ['show']]);
 
 $router->controller('contacts', 'ContactController');
+
+
+
+App\Rating::observe(new App\RatingObserver);
+App\View::observe(new App\ViewObserver);
 
 
 

@@ -11,14 +11,12 @@ use App\Http\Controllers\Controller;
 use App;
 use App\Add;
 use App\Category;
-use Input;
-use DB;
 
 
-class ArchiveController extends Controller {
+class PopController extends Controller {
 
 
-	public function show()
+	public function index()
 	{
 		$topAdds = Add::where('position', 'top')->get();
 
@@ -32,22 +30,17 @@ class ArchiveController extends Controller {
 
 		$categories = Category::all();
 
-		$month = Input::get('month');
+		$games = Game::orderBy('views', 'desc')->paginate(12);
 
-		$games = DB::select( DB::raw("SELECT * FROM games WHERE MONTHNAME(created_at) = :month"), array('month' => $month));
-		//$games = App\Game::select( DB::raw("SELECT * FROM games WHERE MONTHNAME(created_at) = :month"), array('month' => $month));
-		//$games = App\Game::select( DB::raw("SELECT * FROM games WHERE MONTHNAME(created_at) = :month"), array('month' => $month))->get();
-
-		return view('archives.show', [
-									'games' => $games,									
+		return view('pops.index', [
+									'games' => $games,
 									'adds' => $adds,		 						
 		 							'linkAdds' => $linkAdds, 
 		 							'picAdds' => $picAdds, 
 		 							'bottomAdds' => $bottomAdds, 
 		 							'topAdds' => $topAdds,
-		 							'current_page' => '/',
-		 							'categories' => $categories,
-		 							'month' => $month
+		 							'current_page' => 'pops.index',
+		 							'categories' => $categories
 									]);
 
 	}

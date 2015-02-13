@@ -4,7 +4,7 @@
 
 <div class="list-group">
   @foreach($linkAdds as $add)
-  <a href="{{ $add->link }}" class="list-group-item">
+  <a href="{{ $add->link }}" class="list-group-item" target="blank">
     <h4 class="list-group-item-heading">{{ $add->title }}</h4>
     <p class="list-group-item-text">{{ $add->description }}</p>
   </a>

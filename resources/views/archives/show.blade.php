@@ -10,6 +10,7 @@
 
 <div class="row">
 
+
 @foreach($games as $game)
 
 	<div class="col-md-4">
@@ -22,7 +23,7 @@
 		    	@if($game->thumbnail)
 		    	<img src="{{ $game->thumbnail }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
 		    	@else
-		    	<img src="{{ $game->getImagePath() }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
+		    	<img src="../images/noimage.jpg" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
 		   		@endif
 		    </a>		    
 		    <div class="row">
@@ -34,7 +35,11 @@
 		    		@endif
 		    	</div>
 		    	<div class="col-md-6 text-warning">
-		    		Views: *****
+		    		@if($game->views)
+		    		Views: {{ $game->views}}
+		    		@else
+		    		Views: X
+		    		@endif
 		    	</div>
 		    </div>
 
@@ -46,18 +51,15 @@
 
 </div>
 
-<div class="row">
-  <div class="col-md-4 col-md-offset-4">
-	{!! $games->render() !!}
-  </div>
-</div>
 
 @include('common.bottom_adds')
 
 @stop
 
 @section('sidebar')
-
+<div style="margin-bottom:20px;">
+@include('common.archives')
+</div>
 <div style="margin-bottom:20px;">
 @include('common.pic_adds')
 </div>
@@ -67,8 +69,6 @@
 <div style="margin-bottom:20px;">
 @include('common.categories')
 </div>
-<div style="margin-bottom:20px;">
-@include('common.archives')
-</div>
+
 
 @stop

@@ -47,13 +47,14 @@ class Game extends Model {
 		return $this->hasMany('App\Rating');
 	}
 
+	public function views()
+	{
+		return $this->hasMany('App\View');
+	}
+
 	public function getImagePath()
 	{
 		return sprintf('/upload/games/%s.%s', $this->file_name, $this->file_ext);
 	}
 
-	public function getRating()
-	{
-		
-	}
 }

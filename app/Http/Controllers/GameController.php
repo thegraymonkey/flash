@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-
+use Event;
 use App\Category;
 use App\Comment;
 use App\Add;
@@ -13,7 +13,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use App;
 use Intervention\Image\ImageManager;
-
+use App\View as ViewModel;
 
 class GameController extends Controller {
 
@@ -36,7 +36,9 @@ class GameController extends Controller {
 
 		$categories = Category::all();
 
-		return view('games/show', [
+		$this->countView($game->id);
+
+		return view('games.show', [
 									'game' => $game, 
 									'adds' => $adds,		 						
 		 							'linkAdds' => $linkAdds, 
@@ -49,6 +51,15 @@ class GameController extends Controller {
 									]);
 	}
 
+	protected function countView($gameId)
+	{
+		$view = ViewModel::where('game_id',  $gameId)->where('user_ip', ip2long(Request::getClientIp()))->first();
+
+		if(!$view)
+		{
+			ViewModel::create(['game_id' => $gameId, 'user_ip' => ip2long(Request::getClientIp())]);
+		}
+	}
 
 	public function index(){
 
@@ -211,6 +222,7 @@ class GameController extends Controller {
 		}
 		return $game;
 	}
+
 
 
 }

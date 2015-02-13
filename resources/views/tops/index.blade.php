@@ -36,7 +36,11 @@
 		    		@endif
 		    	</div>
 		    	<div class="col-md-6 text-warning">
-		    		Views: *****
+		    		@if($game->views)
+		    		Views: {{ $game->views}}
+		    		@else
+		    		Views: X
+		    		@endif
 		    	</div>
 		    </div>
 

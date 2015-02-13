@@ -10,9 +10,10 @@ use View;
 use App\Http\Controllers\Controller;
 use App;
 use Input;
+use App\View;
 
 
-class RatingController extends Controller {
+class ViewController extends Controller {
 
 
 	public function store()
@@ -21,27 +22,27 @@ class RatingController extends Controller {
 
 		$input = Request::all();
 
-		$gameId = Input::get('game_id');
+		$gameId = $game->getKey();
 
 		$rules = [
-		'rating' => 'required',
+		'view' => 'required',
 		];
 
 		$validation = Validator::make($input, $rules);
 
 		if ($validation->passes())
 		{
-			$rating = Rating::where('game_id',  $gameId)->where('user_ip', ip2long(Request::getClientIp()))->first();
+			$view = View::where('game_id',  $gameId)->where('user_ip', ip2long(Request::getClientIp()))->first();
 
-			if(!$rating)
+			if(!$view)
 			{
-				$rating = new Rating;
+				$view = new View;
 
-				$rating->fill($input);
+				$view->fill($input);
 
-				$rating->user_ip = ip2long($ip);
+				$view->user_ip = ip2long($ip);
 
-				$rating->save();
+				$view->save();
 
 				return Redirect::back()->with('message', 'Rating Recorded!');
 			}

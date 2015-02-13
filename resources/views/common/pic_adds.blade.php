@@ -6,9 +6,9 @@
 <hr>
 
 @if($add->thumbnail)
-	<img src="{{ $add->thumbnail }}" class="img-rounded img-responsive" alt="Responsive image" width="260px" height="260px">
+	<a href="{{ $add->link }}"><img src="{{ $add->thumbnail }}" class="img-rounded img-responsive" alt="Responsive image" width="260px" height="260px"></a>
 @else
-	<img src="{{ $add->getImagePath() }}" class="img-rounded img-responsive" alt="Responsive image" width="260px" height="260px">
+	<a href="{{ $add->link }}"><img src="{{ $add->getImagePath() }}" class="img-rounded img-responsive" alt="Responsive image" width="260px" height="260px"></a>
 @endif
 <p>{{ $add->description }}</p>
 
