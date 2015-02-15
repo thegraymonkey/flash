@@ -21,9 +21,10 @@ class ArchiveController extends Controller {
 
 		$month = Input::get('month');
 
-		$games = DB::select( DB::raw("SELECT * FROM games WHERE MONTHNAME(created_at) = :month"), array('month' => $month));
+		//$games = DB::select( DB::raw("SELECT * FROM games WHERE MONTHNAME(created_at) = :month"), array('month' => $month));
 		//$games = App\Game::select( DB::raw("SELECT * FROM games WHERE MONTHNAME(created_at) = :month"), array('month' => $month));
-		//$games = App\Game::select( DB::raw("SELECT * FROM games WHERE MONTHNAME(created_at) = :month"), array('month' => $month))->get();
+		
+		$games = App\Game::whereRaw( "MONTHNAME(created_at) = '$month'")->get();
 
 		return view('archives.show', [
 									'games' => $games,																		

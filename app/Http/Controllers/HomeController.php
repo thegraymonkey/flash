@@ -9,6 +9,8 @@ use View;
 use App\User;
 use App\Http\Controllers\Controller;
 use App;
+use App\Category;
+use App\Add;
 use Intervention\Image\ImageManager; 
 
 class HomeController extends Controller {
