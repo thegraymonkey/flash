@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use App;
 use Intervention\Image\ImageManager;
 use App\View as ViewModel;
+use App\Category;
 
 class GameController extends Controller {
 

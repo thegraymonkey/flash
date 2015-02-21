@@ -12,7 +12,7 @@
 
  {!! $game->code !!} 
 
-<p class="text-warning well"><strong>Instructions: </strong>{{ $game->instructions }}</p>
+<!--<p class="text-warning well"><strong>Instructions: </strong>{{ $game->instructions }}</p>-->
 <p class="text-primary well"><strong>Description: </strong>{{ $game->description }}</p>
 
 <div style="margin-bottom:50px" class"row">
@@ -52,6 +52,7 @@
 		@endif
 	</div>
 </div>
+
 
 
 <hr>

@@ -35,7 +35,7 @@
     <div class="container">
 
       <div class="masthead" style="margin-bottom:30px;">
-        <!--<h3 class="text-muted">Project name</h3>-->
+        
         <img src="/images/logo1.png" alt="Flash Porn Games">
         <form class="navbar-form navbar-right" role="search" method="GET" action="{{ route('search.index') }}">
 		      <div class="form-group">

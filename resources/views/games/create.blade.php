@@ -26,7 +26,15 @@
 
 				<div class="form-group">
 					<label>Game Code</label>
-					<textarea  class="form-control" name="code"></textarea>
+					<p class="text-primary">If we are hosting the game adjust this code but 						
+						if we are embading game from other source just paste the code provided<p>
+					<textarea  class="form-control" name="code">
+<object width="800" height="512">
+    <param name="movie" value="FOLDERNAME/online-game.swf">
+    <embed src="games/FOLDERNAME/online-game.swf" width="800" height="512">
+    </embed>
+</object> 
+					</textarea>
 				</div>
 
 				<div class="form-group">
