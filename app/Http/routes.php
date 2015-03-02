@@ -45,5 +45,10 @@ $router->controller('contacts', 'ContactController');
 App\Rating::observe(new App\RatingObserver);
 App\View::observe(new App\ViewObserver);
 
+$router->get('warning/off', function(){
+	
+	$response = Response::make('warning off');
+	return $response->withCookie(Cookie::forever('warning_off', 1));
 
+});
 

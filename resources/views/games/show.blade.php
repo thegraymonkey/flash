@@ -12,8 +12,12 @@
 
  {!! $game->code !!} 
 
-<!--<p class="text-warning well"><strong>Instructions: </strong>{{ $game->instructions }}</p>-->
+@if($game->instructions)
+<p class="text-warning well"><strong>Instructions: </strong>{{ $game->instructions }}</p>
+@endif
+@if($game->description)
 <p class="text-primary well"><strong>Description: </strong>{{ $game->description }}</p>
+@endif
 
 <div style="margin-bottom:50px" class"row">
 	<div class="col-md-3">
@@ -80,9 +84,7 @@
 <div style="margin-bottom:20px;">
 @include('common.categories')
 </div>
-<div style="margin-bottom:20px;">
-@include('common.archives')
-</div>
+
 
 @stop
 

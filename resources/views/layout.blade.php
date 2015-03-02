@@ -36,7 +36,8 @@
 
       <div class="masthead" style="margin-bottom:30px;">
         
-        <img src="/images/logo1.png" alt="Flash Porn Games">
+        <img src="/images/porngames.jpg" class="img-rounded img-responsive">
+
         <form class="navbar-form navbar-right" role="search" method="GET" action="{{ route('search.index') }}">
 		      <div class="form-group">
 		        <input type="text" class="form-control" name="query" placeholder="Type name of the game" required autofocus>
@@ -67,11 +68,14 @@
 
       <!-- Site footer -->
       <footer class="footer">
-        <p>&copy; Company 2014</p>
+        <p>&copy; YourFlashPorn.com 2015</p>
       </footer>
 
     </div> <!-- /container -->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    
     @yield('topcss')
     @yield('bottomjs')		
     

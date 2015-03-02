@@ -80,6 +80,12 @@
 
 </div>
 
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+	{!! $games->render() !!}
+  </div>
+</div>
+
 <hr>
 
 <h4>Categories</h4>

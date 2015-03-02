@@ -33,7 +33,7 @@ class ContactController extends Controller {
 			$messageContent = $input['message'];
 			$from = $input['email']; // email onoga ko ti salje poruku
 
-			Mail::send('emails.contact_form', ['from' => $from, 'message_content' => $messageContent], 
+			$mail = Mail::send('emails.contact_form', ['from' => $from, 'message_content' => $messageContent], 
 			function($message) use ($subject, $from)
 			{
 			$message

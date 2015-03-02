@@ -43,7 +43,7 @@ class WelcomeController extends Controller {
 	public function index()
 	{
 		
-		$games = Game::orderBy('created_at', 'desc')->paginate(12);
+		$games = Game::orderBy('created_at', 'desc')->simplePaginate(12);
 
 		return view('welcome', [
 								'games' => $games,								 		 						

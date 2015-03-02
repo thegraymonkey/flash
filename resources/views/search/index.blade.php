@@ -26,8 +26,6 @@
 <div style="margin-bottom:20px;">
 @include('common.categories')
 </div>
-<div style="margin-bottom:20px;">
-@include('common.archives')
-</div>
+
 
 @stop

@@ -30,7 +30,5 @@
 <div style="margin-bottom:20px;">
 @include('common.link_adds')
 </div>
-<div style="margin-bottom:20px;">
-@include('common.archives')
-</div>
+
 @stop

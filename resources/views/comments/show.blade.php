@@ -4,7 +4,7 @@
 		<td width="8%">				
 			<img src="../images/blank.png"/>			
 		</td>
-		<td width="13%">
+		<td width="13%" class="text-primary">
 			<small>{{ $comment->name }}</small> </br>	
 			<small>{{ $comment->created_at->diffForHumans() }}</small>
 		</td>

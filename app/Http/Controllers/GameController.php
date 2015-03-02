@@ -21,7 +21,7 @@ class GameController extends Controller {
 
 		$game = Game::find($id);
 
-		$comments = Comment::where('game_id', $game->getKey())->paginate(10);
+		$comments = Comment::where('game_id', $game->getKey())->simplePaginate(10);
 
 		$this->countView($game->id);
 
@@ -34,11 +34,13 @@ class GameController extends Controller {
 
 	protected function countView($gameId)
 	{
-		$view = ViewModel::where('game_id',  $gameId)->where('user_ip', ip2long(Request::getClientIp()))->first();
+		$ip = ip2long(Request::getClientIp());
+
+		$view = ViewModel::where('game_id',  $gameId)->where('user_ip', $ip)->first();
 
 		if(!$view)
 		{
-			ViewModel::create(['game_id' => $gameId, 'user_ip' => ip2long(Request::getClientIp())]);
+			ViewModel::create(['game_id' => $gameId, 'user_ip' => $ip]);
 		}
 	}
 
@@ -87,6 +89,7 @@ class GameController extends Controller {
 		}	
 
 		return redirect('home')->withErrors($validation);
+
 	}
 
 
@@ -186,7 +189,7 @@ class GameController extends Controller {
 			// save original
 			$imager = new ImageManager;
 			$imager->make($image)
-				->widen(400)
+				->resize(230, 230)
 				->save($originalImagePath);
 
 			$game->file_name = $fileName;

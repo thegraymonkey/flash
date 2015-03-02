@@ -30,8 +30,8 @@
 						if we are embading game from other source just paste the code provided<p>
 					<textarea  class="form-control" name="code">
 <object width="800" height="512">
-    <param name="movie" value="FOLDERNAME/online-game.swf">
-    <embed src="games/FOLDERNAME/online-game.swf" width="800" height="512">
+    <param name="movie" value="/swf/FOLDERNAME/online-game.swf">
+    <embed src="/swf/FOLDERNAME/online-game.swf" width="800" height="512">
     </embed>
 </object> 
 					</textarea>
