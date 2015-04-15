@@ -21,7 +21,7 @@ class AddController extends Controller {
 
 		$rules = [
 		'title' => 'required|min:5',
-		'photo' => 'image|max:2024',
+		'photo' => 'image|max:2024|mimes:jpg,jpeg,gif,png,bmp',
 		'description' => 'min:5',
 		'link' => 'required|min:5',
 		'position' => 'required',
@@ -90,7 +90,7 @@ class AddController extends Controller {
 
 		$rules = [
 		'title' => 'required|min:5',
-		'photo' => 'image|max:2024',
+		'photo' => 'image|max:2024|mimes:jpg,jpeg,gif,png,bmp',
 		'description' => 'required|min:5',
 		'link' => 'required|min:5',
 		'position' => 'required',

@@ -12,7 +12,7 @@
 		    	@if($game->thumbnail)
 		    	<img src="{{ $game->thumbnail }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
 		    	@else
-		    	<img src="{{ $game->getImagePath() }}" class="img-rounded img-responsive" alt="Responsive image" width="230px" height="260px">
+		    	<img src="{{ $game->getImagePath() }}" class="img-rounded img-responsive" alt="Responsive image">
 		   		@endif
 		    </a>
 		    
